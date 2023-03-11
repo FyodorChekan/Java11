@@ -21,10 +21,10 @@ public interface UserDao {
      * @param first_name - имя
      * @param surname - отчество
      * @param post - должность
-     * @param department - отдел
+     * @param department_id - ID отдела
      * @param salary - зарлата
      */
-    void update(int id, String last_name, String first_name, String surname, String post, String department, int salary);
+    void update(int id, String last_name, String first_name, String surname, String post, int salary, int department_id);
 
     /**
      * Создание нового пользователя
@@ -39,4 +39,11 @@ public interface UserDao {
      * @param id - ID пользователя, которого нужно удалить
      */
     void delete(int id);
+
+    /**
+     * Добавление отдела в таблицу отделов
+     *
+     * @param name - название отдела
+     */
+    void add_department(String name);
 }

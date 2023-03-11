@@ -19,6 +19,8 @@ public class Main {
                 update();
             } else if (command.equals("4")) {
                 delete();
+            } else if (command.equals("5")) {
+                add_department();
             }
 
             printMenu();
@@ -46,7 +48,7 @@ public class Main {
 
         System.out.println("Введите отдел:");
         Scanner departmentScanner = new Scanner(System.in);
-        user.setDepartment(departmentScanner.nextLine());
+        user.setDepartmentId(departmentScanner.nextInt());
 
         System.out.println("Введите зарплату:");
         Scanner salaryScanner = new Scanner(System.in);
@@ -94,15 +96,15 @@ public class Main {
         Scanner postScanner = new Scanner(System.in);
         String post = postScanner.nextLine();
 
-        System.out.println("Введите отдел:");
-        Scanner departmentScanner = new Scanner(System.in);
-        String department = departmentScanner.nextLine();
-
         System.out.println("Введите зарплату:");
         Scanner salaryScanner = new Scanner(System.in);
         int salary = salaryScanner.nextInt();
 
-        userDao.update(id, last_name, first_name, surname, post, department, salary);
+        System.out.println("Введите номер отдел:");
+        Scanner departmentScanner = new Scanner(System.in);
+        int department_id = departmentScanner.nextInt();
+
+        userDao.update(id, last_name, first_name, surname, post, salary, department_id);
 
         user = userDao.getById(id);
 
@@ -124,12 +126,26 @@ public class Main {
         System.out.println("Пользователь удалён!");
     }
 
+    private static void add_department() {
+
+        System.out.println("Введите название отдела:");
+        Scanner nameScanner = new Scanner(System.in);
+        String name = nameScanner.nextLine();
+
+        UserDao userDao = new UserDaoImpl();
+
+        userDao.add_department(name);
+
+        System.out.println("Отдел добавлен.");
+    }
+
     private static void printMenu() {
         System.out.println("Введите команду:");
         System.out.println("1) Добавить пользователя.");
         System.out.println("2) Получить пользователя.");
         System.out.println("3) Обновить данные пользователя.");
         System.out.println("4) Удалить пользователя.");
+        System.out.println("5) Добавить отдел в таблицу отделов.");
         System.out.println("0) Выход.");
     }
 }
